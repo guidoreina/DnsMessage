@@ -251,11 +251,16 @@ class DnsMessage {
           } else {
             // Null label.
 
-            if (npointers == 0) {
-              offset = off + 1;
-            }
+            // If not the root domain name...
+            if (len > 0) {
+              if (npointers == 0) {
+                offset = off + 1;
+              }
 
-            return new String(domain, 0, len);
+              return new String(domain, 0, len);
+            } else {
+              return null;
+            }
           }
 
           break;
